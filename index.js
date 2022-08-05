@@ -181,3 +181,72 @@ function generateEngineer() {
 };
 
 generateEngineer();
+
+// Array for Intern input required fields
+const internInput = ([
+    {    
+        type: 'input',
+        name: 'internName',
+        message: 'Provide your first and last name (Required)',
+        validate: internNameInput => {
+            if (internNameInput) {
+                return true;
+            } else {
+                console.log('You need to enter a name in this required field!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'internId',
+        message: 'Provide your assigned 6 digit ID number. (Required)',
+        validate: internIdInput => {
+            if (internIdInput > 000000 && internIdInput < 999999) {
+                return true;
+            } else {
+                console.log('You need to enter an ID in this required field!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'internEmail',
+        message: 'Provide your assigned employee email address. (Required)',
+        validate: internEmailInput => {
+            if (internEmailInput) {
+                return true;
+            } else {
+                console.log('You need to enter an email in this required field!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'internSchool',
+        message: 'Provide your School name. (Required)',
+        validate: internSchoolInput => {
+            if (internSchoolInput) {
+                return true;
+            } else {
+                console.log('You need to enter a school in this required field!');
+                return false;
+            }
+        }
+    } 
+]);
+
+function generateIntern() {
+    return inquirer.prompt(internInput)
+        .then((data) => {
+            const getIntern = new Intern(data) 
+            teamProfile.push(getIntern)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+};
+
+generateIntern();
