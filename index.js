@@ -114,5 +114,58 @@ function generateManager() {
 generateManager();
 
 // Array for Engineer required fields
-
+const engineerInput = ([
+    {    
+        type: 'input',
+        name: 'engineerName',
+        message: 'Provide your first and last name (Required)',
+        validate: engineerNameInput => {
+            if (engineerNameInput) {
+                return true;
+            } else {
+                console.log('You need to enter a name in this required field!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'engineerId',
+        message: 'Provide your assigned 6 digit ID number. (Required)',
+        validate: engineerIdInput => {
+            if (engineerIdInput > 000000 && engineerIdInput < 999999) {
+                return true;
+            } else {
+                console.log('You need to enter an ID in this required field!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'engineerEmail',
+        message: 'Provide your assigned employee email address. (Required)',
+        validate: engineerEmailInput => {
+            if (engineerEmailInput) {
+                return true;
+            } else {
+                console.log('You need to enter an email in this required field!');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        name: 'engineerGithub',
+        message: 'Provide your GitHub username. (Required)',
+        validate: engineerGithubInput => {
+            if (engineerGithubInput) {
+                return true;
+            } else {
+                console.log('You need to enter an office number in this required field!');
+                return false;
+            }
+        }
+    }
+]);
 
