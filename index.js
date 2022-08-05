@@ -169,3 +169,16 @@ const engineerInput = ([
     }
 ]);
 
+function generateEngineer() {
+    return inquirer.prompt(engineerInput)
+        .then((data) => {
+            const getEngineer = new Engineer(data) 
+            teamProfile.push(getEngineer)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+};
+
+generateEngineer();
+
