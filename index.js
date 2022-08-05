@@ -1,49 +1,48 @@
 // Packages needed for this application
 // Declaring reference to element using const for constant reference
 // using node.js require statement to access fs, inquirer, Manager, Engineer, Employee, Intern, generateTeam to access the modules functions by the const assignment
-
-const fs = require("fs");
+const fs = require('fs');
 const inquirer = require('inquirer');
-const Manager = require('../lib/Manager');
-const Engineer = require('../lib/Engineer');
-const Employee = require('../lib/Employee');
-const Intern = require('../lib/Intern');
-const generateTeam = require('../lib/generateTeam');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Employee = require('./lib/Employee');
+const Intern = require('./lib/Intern');
+const generateTeam = require('./lib/generateTeam');
 const { userInfo } = require("os");
 // empty array to pass in teamProfile 
 const teamProfile = [];
 
 // prompt user to choose which team member they would like to add, once user chooses that team members questions will prompt
-const chooseTeam = () => {
-    return inquirer.prompt ([
-        {
-            type: 'list',
-            name: 'profile',
-            message: 'Choose which team member you are adding -',
-            choices: ['Manager', 'Engineer', 'Intern', 'Done']
-        }
-    ])
-    .then(teamChoice => {
-        // takes user to selected team member choices
-        switch (teamChoice.profile) {
-            // manager input array
-            case 'Manager':
-                managerInput();
-                break;
-            // engineer input array
-            case 'Engineer':
-                engineerInput();
-                break;
-            // intern input array
-            case 'Intern':
-                internInput();
-                break;
-            // will generate the user input with team members for profile through html
-            default:
-                generateProfile();
-        }
-    })
-}
+// const chooseTeam = () => {
+//     return inquirer.prompt ([
+//         {
+//             type: 'list',
+//             name: 'profile',
+//             message: 'Choose which team member you are adding -',
+//             choices: ['Manager', 'Engineer', 'Intern', 'Done']
+//         }
+//     ])
+//     .then(teamChoice => {
+//         // takes user to selected team member choices
+//         switch (teamChoice.profile) {
+//             // manager input array
+//             case 'Manager':
+//                 managerInput();
+//                 break;
+//             // engineer input array
+//             case 'Engineer':
+//                 engineerInput();
+//                 break;
+//             // intern input array
+//             case 'Intern':
+//                 internInput();
+//                 break;
+//             // will generate the user input with team members for profile through html
+//             default:
+//                 generateProfile();
+//         }
+//     })
+// }
 
 // Array for Manager input required fields
 const managerInput = ([
@@ -65,7 +64,7 @@ const managerInput = ([
         name: 'managerId',
         message: 'Provide your assigned 6 digit ID number. (Required)',
         validate: managerIdInput => {
-            if (managerIdInput >= 000000 && managerIdInput <= 999999) {
+            if (managerIdInput > 000000 && managerIdInput < 999999) {
                 return true;
             } else {
                 console.log('You need to enter an ID in this required field!');
@@ -99,9 +98,21 @@ const managerInput = ([
             }
         }
     }
-])
-.then(input => {
-    const manager = new Manager(input.managerName, input.managerId, input.managerEmail, input.managerOffice);
-    teamProfile.push(manager);
-    chooseTeam();
-})
+]);
+
+function generateManager() {
+    return inquirer.prompt(managerInput)
+        .then((data) => {
+            const getManager = new Manager(data) 
+            teamProfile.push(getManager)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+};
+
+generateManager();
+
+// Array for Engineer required fields
+
+
