@@ -162,7 +162,7 @@ const engineerInput = ([
             if (engineerGithubInput) {
                 return true;
             } else {
-                console.log('You need to enter an office number in this required field!');
+                console.log('You need to enter a GitHub name in this required field!');
                 return false;
             }
         }
@@ -181,4 +181,3 @@ function generateEngineer() {
 };
 
 generateEngineer();
-
