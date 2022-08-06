@@ -3,53 +3,22 @@
 // using node.js require statement to access fs, inquirer, Manager, Engineer, Employee, Intern, generateTeam to access the modules functions by the const assignment
 const fs = require('fs');
 const inquirer = require('inquirer');
+// Employee is not needed to add
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const Employee = require('./lib/Employee');
 const Intern = require('./lib/Intern');
-const generateTeam = require('./lib/generateTeam');
-const { userInfo } = require("os");
+const generateTeam = require('./utils/generateTeam.js');
 // empty array to pass in teamProfile 
 const teamProfile = [];
 
-// prompt user to choose which team member they would like to add, once user chooses that team members questions will prompt
-// const chooseTeam = () => {
-//     return inquirer.prompt ([
-//         {
-//             type: 'list',
-//             name: 'profile',
-//             message: 'Choose which team member you are adding -',
-//             choices: ['Manager', 'Engineer', 'Intern', 'Done']
-//         }
-//     ])
-//     .then(teamChoice => {
-//         // takes user to selected team member choices
-//         switch (teamChoice.profile) {
-//             // manager input array
-//             case 'Manager':
-//                 managerInput();
-//                 break;
-//             // engineer input array
-//             case 'Engineer':
-//                 engineerInput();
-//                 break;
-//             // intern input array
-//             case 'Intern':
-//                 internInput();
-//                 break;
-//             // will generate the user input with team members for profile through html
-//             default:
-//                 generateProfile();
-//         }
-//     })
-// }
-
-// Array for Manager input required fields
-const managerInput = ([
+const employeeInput = () => {
+// Array for Manager input required fields for user, first so manager will be prompted to choose team after inputing information
+const managerInput = () => {
+    inquirer.prompt([
     {    
         type: 'input',
         name: 'managerName',
-        message: 'Provide your first and last name (Required)',
+        message: 'As Manager, please provide your first and last name (Required)',
         validate: managerNameInput => {
             if (managerNameInput) {
                 return true;
@@ -97,24 +66,49 @@ const managerInput = ([
                 return false;
             }
         }
-    }
-]);
-
-function generateManager() {
-    return inquirer.prompt(managerInput)
+    }])
         .then((data) => {
             const getManager = new Manager(data) 
             teamProfile.push(getManager)
+            chooseTeam();
         })
         .catch((error) => {
             console.log(error)
         })
 };
 
-generateManager();
+// prompt user to choose which team member they would like to add, once user chooses that team members questions will prompt
+const chooseTeam = () => {
+    inquirer.prompt ([
+        {
+            type: 'list',
+            name: 'profile',
+            message: 'Choose which team members you would like to add to your Team Profile:',
+            choices: ['Engineer', 'Intern', 'Done']
+        }
+    ])
+    .then(teamChoice => {
+        // takes user to selected team member choices
+        // using switch statement to select specific code block selected
+        switch (teamChoice.profile) {
+            // engineer input array
+            case 'Engineer':
+                engineerInput();
+                break;
+            // intern input array
+            case 'Intern':
+                internInput();
+                break;
+            // will generate the user input with team members for profile through html
+            default:
+                generateProfile();
+        }
+    })
+}
 
 // Array for Engineer required fields
-const engineerInput = ([
+const engineerInput = () => {
+    inquirer.prompt([
     {    
         type: 'input',
         name: 'engineerName',
@@ -166,24 +160,20 @@ const engineerInput = ([
                 return false;
             }
         }
-    }
-]);
-
-function generateEngineer() {
-    return inquirer.prompt(engineerInput)
-        .then((data) => {
-            const getEngineer = new Engineer(data) 
-            teamProfile.push(getEngineer)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    }])
+    .then((data) => {
+        const getEngineer = new Engineer(data) 
+        teamProfile.push(getEngineer)
+        chooseTeam();
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 };
 
-generateEngineer();
-
 // Array for Intern input required fields
-const internInput = ([
+const internInput = () => {
+    inquirer.prompt([
     {    
         type: 'input',
         name: 'internName',
@@ -202,7 +192,7 @@ const internInput = ([
         name: 'internId',
         message: 'Provide your assigned 6 digit ID number. (Required)',
         validate: internIdInput => {
-            if (internIdInput > 000000 && internIdInput < 999999) {
+            if (internIdInput > 000000 || internIdInput < 999999) {
                 return true;
             } else {
                 console.log('You need to enter an ID in this required field!');
@@ -235,18 +225,22 @@ const internInput = ([
                 return false;
             }
         }
-    } 
-]);
-
-function generateIntern() {
-    return inquirer.prompt(internInput)
-        .then((data) => {
-            const getIntern = new Intern(data) 
-            teamProfile.push(getIntern)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+    }])
+    .then((data) => {
+        const getIntern = new Intern(data) 
+        teamProfile.push(getIntern)
+        chooseTeam();
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 };
 
-generateIntern();
+const generateProfile = () => {
+    fs.writeFileSync('./dist/index.html', generateTeam(teamProfile))
+}
+managerInput();
+};
+
+// run the team profile generator
+employeeInput();
