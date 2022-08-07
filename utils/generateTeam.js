@@ -15,7 +15,7 @@ const createEngineeer = engineer => {
     var engineer = /*html*/ `
         <div class="panel" style="background-image: url(./imgs/engineer.jpeg);">
         <h3 class="title">Engineer: ${engineer.name}</h3>
-        <p>ID: ${engineer.id}<br>Email: <span id="email"><a href="mailto:${engineer.email}">${engineer.email}</a></span><br> GitHub: ${engineer.gitHub}</p>
+        <p>ID: ${engineer.id}<br>Email: <span id="email"><a href="mailto:${engineer.email}">${engineer.email}</a></span><br> GitHub: <a href="https://github.com/${engineer.gitHub}" target="_blank">${engineer.gitHub}</a></p>
         </div> 
     `;
     createHTML.push(engineerCard);
