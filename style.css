@@ -95,8 +95,8 @@ body {
         width: 50vw;
     }
 
-    .panel:nth-of-type(4),
-    .panel:nth-of-type(5) {
+    .panel:nth-of-type(),
+    .panel:nth-of-type() {
         display: none;
     }
 }
