@@ -161,8 +161,8 @@ const engineerInput = () => {
             }
         }
     }])
-    .then((data) => {
-        const getEngineer = new Engineer(data) 
+    .then((input) => {
+        const getEngineer = new Engineer(input.engineerName, input.engineerId, input.engineerEmail, input.engineerGithub) 
         teamProfile.push(getEngineer)
         chooseTeam();
     })
@@ -226,8 +226,8 @@ const internInput = () => {
             }
         }
     }])
-    .then((data) => {
-        const getIntern = new Intern(data) 
+    .then((input) => {
+        const getIntern = new Intern(input.internName, input.internId, input.internEmail, input.internSchool) 
         teamProfile.push(getIntern)
         chooseTeam();
     })
