@@ -67,8 +67,8 @@ const managerInput = () => {
             }
         }
     }])
-        .then((data) => {
-            const getManager = new Manager(data) 
+        .then((input) => {
+            const getManager = new Manager(input.managerName, input.managerId, input.managerEmail, input.managerOffice) 
             teamProfile.push(getManager)
             chooseTeam();
         })
