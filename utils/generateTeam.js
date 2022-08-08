@@ -6,9 +6,9 @@ const createNewTeam = (employeeCards) => {
     const createManager = manager => {
         // html for manager section
         return /*html*/ `
-            <div class="panel active" style="background-image: url(./imgs/manager.jpeg);">
+            <div class="card active" style="background-image: url(./imgs/manager.jpeg);">
             <h3 class="title">Manager: ${manager.getName()}</h3>
-            <p>ID: ${manager.getId()}<br>Email: <span id="email"><a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></span><br> Office: ${manager.getOfficeNumber()}</p>
+            <p>ID: ${manager.getId()}<br>Email: <span id="email" class="email"><a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></span><br> Office: ${manager.getOfficeNumber()}</p>
             </div>
         `;
     }
@@ -16,9 +16,9 @@ const createNewTeam = (employeeCards) => {
     const createEngineeer = engineer => {
         // html for engineer section
         return /*html*/ `
-            <div class="panel" style="background-image: url(./imgs/engineer.jpeg);">
+            <div class="card" style="background-image: url(./imgs/engineer.jpeg);">
             <h3 class="title">Engineer: ${engineer.getName()}</h3>
-            <p>ID: ${engineer.getId()}<br>Email: <span id="email"><a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></span><br> GitHub: <a href="https://github.com/${engineer.getGitHub()}" target="_blank">${engineer.getGitHub()}</a></p>
+            <p>ID: ${engineer.getId()}<br>Email: <span id="email" class="email"><a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></span><br> GitHub: <a href="https://github.com/${engineer.getGitHub()}" target="_blank">${engineer.getGitHub()}</a></p>
             </div> 
         `;
     }
@@ -26,9 +26,9 @@ const createNewTeam = (employeeCards) => {
     const createIntern = intern => {
         // html for intern section
         return /*html*/ `
-            <div class="panel" style="background-image: url(./imgs/intern.jpeg);">
+            <div class="card" style="background-image: url(./imgs/intern.jpeg);">
             <h3 class="title">Intern: ${intern.getName()}</h3>
-            <p>ID: ${intern.getId()}<br>Email: <span id="email"><a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></span><br> School: ${intern.getSchool()}</p>
+            <p>ID: ${intern.getId()}<br>Email: <span id="email" class="email"><a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></span><br> School: ${intern.getSchool()}</p>
             </div>
         `;
     }

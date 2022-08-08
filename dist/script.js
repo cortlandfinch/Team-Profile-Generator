@@ -1,14 +1,15 @@
-const panels = document.querySelectorAll(".panel");
+// script for employee pan
+const cards = document.querySelectorAll(".card");
 
-panels.forEach((panel) => {
-    panel.addEventListener("click", () => {
+cards.forEach((card) => {
+    card.addEventListener("click", () => {
         removeActiveClasses();
-        panel.classList.add("active");
+        card.classList.add("active");
     });
 });
 
 const removeActiveClasses = () => {
-    panels.forEach((panel) => {
-        panel.classList.remove("active");
+    cards.forEach((card) => {
+        card.classList.remove("active");
     });
 };

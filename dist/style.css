@@ -25,7 +25,7 @@ body {
     margin-right: 2%;
 }
 
-.panel {
+.card {
     background-size: auto 165%;
     filter: brightness(20%);
     background-position: center;
@@ -42,7 +42,7 @@ body {
     -webkit-transition: all 300ms ease-in;
 }
 
-.panel h3 {
+.card h3 {
     font-size: 50px;
     font-weight: 300;
     position: absolute;
@@ -59,7 +59,7 @@ body {
     padding: 0 5px;
 }
 
-.panel p {
+.card p {
     background-color: rgba(0, 0, 0, 0.65);
     box-shadow: rgba(0, 0, 0, 0.5) 0 8px 10px;
     border-radius: 5px;
@@ -73,32 +73,37 @@ body {
     opacity: 0;
 }
 
-.panel.active {
+.card.active {
     flex: 5;
     filter: brightness(1);
     text-align: left;
 }
 
-.panel.active h3 {
+.card.active h3 {
     opacity: 1;
     transition: opacity 0.3s ease-in 0.4s;
     filter: brightness(1);
     color: rgb(255, 255, 255);
 }
 
-.panel.active p {
+.card.active p {
     opacity: 1;
     transition: opacity 0.3s ease-in 0.4s;
     filter: brightness(1);
 }
 
+a {
+    text-decoration: none;
+    color: rgb(30, 152, 218);
+}
+
+a:hover {
+    color: rgb(5, 97, 183);
+    text-decoration: underline;
+}
+
 @media (max-width: 480px) {
     .container {
         width: 50vw;
-    }
-
-    .panel:nth-of-type(),
-    .panel:nth-of-type() {
-        display: none;
     }
 }
